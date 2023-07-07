@@ -1,0 +1,24 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.1"}
+        scicloj/tablecloth {:mvn/version "4.04"}
+        hickory/hickory {:mvn/version "0.7.1"}
+        hiccup/hiccup {:mvn/version "1.0.5"}
+        clj-http/clj-http {:mvn/version "3.12.1"}}
+ :aliases
+ {:run-m {:main-opts ["-m" "pradesigner.fyscraper"]}
+  :run-x {:ns-default pradesigner.fyscraper
+          :exec-fn greet
+          :exec-args {:name "Clojure"}}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
+  :runner
+  {:extra-deps {com.cognitect/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "b6b3193fcc42659d7e46ecd1884a228993441182"}}
+   :main-opts ["-m" "cognitect.test-runner"
+               "-d" "test"]}
+  :uberjar {:replace-deps {seancorfield/depstar {:mvn/version "2.0.165"}}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true
+                        :jar "fyscraper.jar"
+                        :main-class "pradesigner.fyscraper"}}}}
